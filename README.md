@@ -3,6 +3,7 @@
 A simple Python3 tool for the transliteration of the existing Sinoglyph-Latin script used in Hong Kong Cantonese into either a Jyutcitzi-only or Honzi-Jyutcitzi mixed script.
 
 ## Example
+
 ```
 $ cat sample.txt
 喂，我哋唔係啱啱已經喺嗰度好咧啡噉噏咗你嗰啲咁𠵇𠺫嘅嘢㗎喇咩？嗱，你唔好咁忟憎先。喂你咪諗住玩我呀，我已經噒熟咗份嘢㗎啦。我哋淨話個presentation已經cover嗮阿Tim prepare嗰份document入面啲bullet point㗎嘞，你之前想幫手proofread份嘢就早響吖嘛。重有呀，你鬧乜Q唧，我噚日都係啱先喺Budapest飛返嚟咋嘛，使唔使咁火滾呀？唉算喇，我哋不如都係下個禮拜再開會傾過啦係咪先，我而家要趕住去健身中心做gym keep fit，係噉先啦掰掰。
@@ -22,17 +23,21 @@ Output:
 禾兮`，我大丌ﾞ五.⁼係爻彡¯々已經亾兮´丩个´度好力旡`夫旡¯丩今´噏止个´你丩个´大子¯丩今`臼了⁼力了¯丩旡´央旡˝丩乍`力乍`文旡¯？
 ----------
 ```
+
 ![alt text](https://github.com/jyutcitzi/jyutcitzi-transliterate/blob/6416ded789db13e416cde9990221d6a098cf7ceb/images/out.png "out.txt")
 
 ## Installation
+
 ```
 pip install ToJyutping
 pip install pycantonese
 pip install wordsegment
 ```
+
 In order to render the Jyutcitzi glyphs when using the font mode, install the fonts at https://github.com/jyutcitzi/jyutcitzi-fonts.
 
 ## Usage
+
 ```
 usage: transliterate.py [-h] [-m MODE] [-s STYLE] [-r R] [-v V] [-t DIRECTION]
                         [--use_repeat_char BOOL] [--use_schwa_char BOOL]
@@ -40,7 +45,7 @@ usage: transliterate.py [-h] [-m MODE] [-s STYLE] [-r R] [-v V] [-t DIRECTION]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -m MODE, --mode MODE  use font or web-style characters
+  -m MODE, --mode MODE  use font (font) or web-style (web) characters
   -s STYLE, --style STYLE
                         use jcz-only (jcz_only) or sinoglyph-jcz (honzi_jcz)
                         writing style
@@ -49,7 +54,7 @@ optional arguments:
   -v V, --v_block V     whether to use v or f for representing the onset 'v'
   -t DIRECTION, --tone_config DIRECTION
                         whether to use vertical or horizontal ticks for tones
-                        1 and 4
+                        1 and 4 (vertical or horizontal)
   --use_repeat_char BOOL
                         whether to use the repeat glyph 々
   --use_schwa_char BOOL
@@ -60,4 +65,22 @@ optional arguments:
   -x BOOL, --sep_eng_words BOOL
                         whether to add whitespace between English words in the
                         output
+```
+
+The most often used command for me is
+
+```shell
+python3 transliterate.py -r wl -t vertical --use_repeat_char true < sample.txt > out.txt
+```
+
+For complete translation to jyutcitzi :
+
+```shell
+python3 transliterate.py -s jcz_only -r wl -t vertical --use_repeat_char true < sample.txt > out.txt
+```
+
+To compile a text into a text with jyutcitzi ruby characters fit for LaTeX, use the following. Do not include any latin characters, or the engine will go haywire.
+
+```shell
+ python3 generate_ruby_latex.py sample.txt out.txt
 ```

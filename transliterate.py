@@ -280,7 +280,7 @@ def tojyutping_converter(input, cur_cmu, orthography='honzi_jcz', sep_eng_words=
                 outs, unparsed, prev_was_eng_word and sep_eng_words)
   return outs, unparsed
 
-def transliterate(input, mode='font', orthography='honzi_jcz', use_repeat_char=True,
+def transliterate(input, mode='font', orthography='honzi_jcz', use_repeat_char=False,
                   initial_r_block="r", v_block="v", tone_config='horizontal',
                   use_schwa_char=False, algorithm="PyCantonese", sep_eng_words=True):
   assert mode in {'font', 'web'}
@@ -355,7 +355,7 @@ def transliterate(input, mode='font', orthography='honzi_jcz', use_repeat_char=T
                   # initial_r_block="r", v_block="v", tone_config='horizontal',
                   # use_schwa_char=False, algorithm="PyCantonese", sep_eng_words=True)
 
-def file_transliterator(file, mode='font', orthography='honzi_jcz', use_repeat_char=True,
+def file_transliterator(file, mode='font', orthography='honzi_jcz', use_repeat_char=False,
                   initial_r_block="r", v_block="v", tone_config='horizontal',
                   use_schwa_char=False, algorithm="PyCantonese", sep_eng_words=True):
     with open(args.file, 'r') as f:
@@ -366,7 +366,7 @@ def file_transliterator(file, mode='font', orthography='honzi_jcz', use_repeat_c
     return "Error: couldn't read " + file
 
 def pipe_transliterator(input, file=None, mode='font', orthography='honzi_jcz',
-                  use_repeat_char=True, initial_r_block="r", v_block="v",
+                  use_repeat_char=False, initial_r_block="r", v_block="v",
                   tone_config='horizontal', use_schwa_char=False,
                   algorithm="PyCantonese", sep_eng_words=True):
     return transliterate(input, mode, orthography, use_repeat_char,
@@ -392,7 +392,7 @@ if __name__ == '__main__':
                         help="whether to use vertical or horizontal ticks for tones 1 and 4",
                         metavar="DIRECTION", default='horizontal')
     parser.add_argument("--use_repeat_char", dest="use_repeat_char",
-                        help="whether to use the repeat glyph 々", metavar='BOOL', type=bool, default=True)
+                        help="whether to use the repeat glyph 々", metavar='BOOL', type=bool, default=False)
     parser.add_argument("--use_schwa_char", dest="use_schwa_char",
                         help="whether to use 亇 for the final 'a' instead of 乍", metavar='BOOL', type=bool, default=False)
     parser.add_argument("-a","--alg", dest="algorithm",
